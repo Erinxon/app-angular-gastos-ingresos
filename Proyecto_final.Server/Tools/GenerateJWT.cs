@@ -20,14 +20,14 @@ namespace Proyecto_final.Server.Tools
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.GivenName, user.FirstName),
-                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim("id", user.Id.ToString()),
+                new Claim("email", user.Email),
+                new Claim("firstName", user.FirstName),
+                new Claim("lastName", user.LastName),
             };
 
             var token = new JwtSecurityToken(config["Jwt:Issuer"], config["Jwt:Audience"],
-              claims, expires: DateTime.Now.AddDays(2),
+              claims, expires: DateTime.Now.AddDays(1),
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
